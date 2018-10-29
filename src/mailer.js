@@ -14,16 +14,16 @@ function setup() {
 }
 
 export default function sendConfirmationEmail(user) {
-    const transport = setup();
+    const tranport = setup();
     const email = {
         from,
         to: user.email,
         subject: "Welcome to Bookworm",
-        test: `
-        Welcome to Bookworm. Please, confirm your email.
-        ${user.generateConfirmationUrl}
-        `
-    }
+        text: `
+      Welcome to Bookworm. Please, confirm your email.
+      ${user.generateConfirmationUrl()}
+      `
+    };
 
-    transport.sendMail(email);
+    tranport.sendMail(email);
 }

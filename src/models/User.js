@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     email: { type: String, required: true, lowercase: true, index: true, unique: true },
     passwordHash: { type: String, required: true },
     confirmed: { type: Boolean, dafault: false },
-    confirmationToken: { tupe: String, default: '' }
+    confirmationToken: { type: String, default: '' }
 }, { timestamps: true });
 
 schema.methods.isValidPassword = function isValidPassword(password) {
@@ -29,7 +29,8 @@ schema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
 
 schema.methods.generateJWT = function generateJWT() {
     return jwt.sign({
-        email: this.email
+        email: this.email,
+        confirm: this.confirmed
     }, process.env.JWT_SECRET);
 }
 
